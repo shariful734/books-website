@@ -1,3 +1,5 @@
+// fetching the url 
+
 const searchFood = () => {
     const searchField = document.getElementById('search-field');
 
@@ -13,34 +15,52 @@ const searchFood = () => {
 
 }
 
+
+// loading the books 
+
 const loadSearchBooks = docs => {
 
     const results = document.getElementById('results');
 
     results.textContent = '';
 
-    docs.forEach(docs => {
-        console.log(docs);
+    if (docs.length === 0) {
+        const errorMessage = document.getElementById('error');
 
-        const div = document.createElement('div');
+        errorMessage.style.display = 'block';
+    }
 
-        div.classList.add('col');
+    else {
 
-        div.innerHTML = `
-                     <div class="card h-100">
-                           <img src="" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h3 class="card-title">${docs.title}</h3>
-                            <h5>${docs.author_name[0]}</h5>
-                            <p>${docs.first_publish_year}</p>                         
+        docs.forEach(docs => {
+            console.log(docs);
+
+            const div = document.createElement('div');
+
+            div.classList.add('col');
+
+            div.innerHTML = `
+                         <div class="card h-100">
+                               <img src="https://covers.openlibrary.org/b/id/${docs.cover_i}-M.jpg" class="card-img-top w-50 mx-auto mt-3 h-50" alt="..." >
+                            <div class="card-body text-center mt-3">
+                                <h3 class="card-title">${docs.title}</h3>
+                                <h5>Author:${docs.author_name[0]}</h5>
+                                <p>First Published:${docs.first_publish_year}</p>                         
+                            </div>
                         </div>
-                    </div>
-        `;
+            `;
 
-        results.appendChild(div);
-    })
+            results.appendChild(div);
+        })
+
+
+
+    }
+
 
 }
+
+
 
 
 
